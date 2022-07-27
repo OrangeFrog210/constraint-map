@@ -22,7 +22,7 @@ global PRIOR_PROPS ALPHAS_BETAS RATIOS;
 
 %%%%%% Constants and defaults %%%%%%
 if DO_HOMOLOGY
-    Num_features = 1345;
+    Num_features = 1345; % probably need to modify Num_features
 else
     Num_features = 1325;
 end

@@ -35,7 +35,7 @@ Pssm_aas = 'ARNDCQEGHILKMFPSTWYV';
 Offset = length(Pssm_aas) - 1;
 PU_stab_features = [4, 5, 6, 1];
 
-data_matrix = zeros(length(mutations), Num_features);
+data_matrix = zeros(length(mutations), Num_features); % probably need to modify Num_features
 property_matrix = zeros(length(mutations), (Num_props * 4) + 1);
 position_matrix = zeros(length(mutations), Num_props);
 position_matrix_pu = zeros(length(mutations), Num_props);

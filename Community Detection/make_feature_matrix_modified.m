@@ -68,12 +68,12 @@ p{1} = hydrophobicity(cleaned, 1);
 pf{1} = 'Hydrophobicity';
 
 % Get hydrophobic moments
-p{2} = hydrophobic_moment(cleaned, 11, 100);
-pf{2} = 'Hydrophobic_moments_100';
-p{3} = hydrophobic_moment(cleaned, 11, 160);
-pf{3} = 'Hydrophobic_moments_160';
-p{4} = hydrophobic_moment(cleaned, 11, 120);
-pf{4} = 'Hydrophobic_moments_120';
+% p{2} = hydrophobic_moment(cleaned, 11, 100);
+% pf{2} = 'Hydrophobic_moments_100';
+% p{3} = hydrophobic_moment(cleaned, 11, 160);
+% pf{3} = 'Hydrophobic_moments_160';
+% p{4} = hydrophobic_moment(cleaned, 11, 120);
+% pf{4} = 'Hydrophobic_moments_120';
 
 % Get Vihinen flexibility
 p{5} = vihinen(cleaned);

@@ -74,55 +74,6 @@ vect_pr = make_pr_feat_internal(cleaned, positions, p, Win_pr, pf);
 this_matrix = [vect_aa vect_pr];
 
 
-%%%%%% Mutation-based features %%%%%%
-vect_submat = [];
-for j = 1:length(validated)
-    wild = validated{j}(1);
-    mut = validated{j}(end);
-    sub_scores = get_substitution_score(wild,  mut);
-    vect_submat = [vect_submat; [sub_scores GRANTHAM(AMINO_ACIDS == wild, AMINO_ACIDS == mut)]];
-end
-
-% Add binary encoding
-pairings = regexprep(validated, '[0-9]+', '');
-vect_bin = encode_mutation(pairings);
-
-% Add to main feature matrix
-this_matrix = [this_matrix vect_submat vect_bin];
-
-
-%%%%%% PSSM-based features %%%%%%
-% Fetch or generate PSSM
-PSSM = get_pssm(sequence)';
-
-pssm_flag = zeros(length(mutations), 1);
-if isempty(PSSM) & SKIP_PSIBLAST
-    vect_pssm = zeros(length(validated), 168);
-    vect_bin = zeros(length(validated), 1);
-    pssm_flag = ones(length(mutations), 1);
-elseif isempty(PSSM) & ~SKIP_PSIBLAST
-    tmp_file = strcat(tempname(pwd), '.faa');
-    [~, tmp_head] = fileparts(tmp_file);
-    pssm_file = strcat(tmp_head, '.pssm');
-    
-    writeFASTA({sequence}, {tmp_head}, tmp_file);
-    system(sprintf('%s/blast-2.2.18/bin/blastpgp -i %s -d %s/nr062813/nr -Q %s -a 3 -h 0.0001 -j 3 > /dev/null', CURRDIR, tmp_file, CURRDIR, pssm_file));
-    PSSM = PSSMread(pssm_file)';
-    %system(sprintf('rm %s*', tmp_head));
-    delete(tmp_file, pssm_file);
-
-    vect_pssm = make_ev_feat_mp2(sequence, positions, PSSM);
-    vect_bin = ones(length(validated), 1);
-else
-    % Make PSSM features
-    vect_pssm = make_ev_feat_mp2(sequence, positions, PSSM);
-    vect_bin = ones(length(validated), 1);
-end
-
-% Add to main feature matrix
-this_matrix = [this_matrix vect_pssm vect_bin];
-
-
 %%%%%% Alignment-based features %%%%%%
 % Intialize
 vect_trans = zeros(length(validated), 6);
@@ -224,16 +175,6 @@ this_matrix = [this_matrix vect_trans vect_freq vect_cindex vect_bin];
 
 % Finalize remarks matrix
 remarks = [logs pssm_flag aln_flag pred_aln_flag];
-
-
-%%%%%% Homology count features if set to on %%%%%%
-if DO_HOMOLOGY
-    % Get paralogy profiles
-    vect_hprofile = get_para_prof(sequence);
-
-    % Add to main feature matrix
-    this_matrix = [this_matrix repmat(vect_hprofile, length(validated), 1)];
-end
 
 
 %%%%%% Predicted property-based features %%%%%%

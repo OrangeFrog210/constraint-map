@@ -80,8 +80,8 @@ p{5} = vihinen(cleaned);
 pf{5} = 'Vihinen_flexibility';
 
 % Get amino acid volumes
-p{6} = get_aa_volumes(cleaned);
-pf{6} = 'Amino_acid_volume';
+% p{6} = get_aa_volumes(cleaned);
+% pf{6} = 'Amino_acid_volume';
 
 % Extract features at positions    
 vect_pr = make_pr_feat_internal(cleaned, positions, p, Win_pr, pf);

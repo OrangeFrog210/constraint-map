@@ -67,22 +67,6 @@ cleaned = clean_protein(sequence);
 p{1} = hydrophobicity(cleaned, 1);
 pf{1} = 'Hydrophobicity';
 
-% Get hydrophobic moments
-% p{2} = hydrophobic_moment(cleaned, 11, 100);
-% pf{2} = 'Hydrophobic_moments_100';
-% p{3} = hydrophobic_moment(cleaned, 11, 160);
-% pf{3} = 'Hydrophobic_moments_160';
-% p{4} = hydrophobic_moment(cleaned, 11, 120);
-% pf{4} = 'Hydrophobic_moments_120';
-
-% Get Vihinen flexibility
-p{5} = vihinen(cleaned);
-pf{5} = 'Vihinen_flexibility';
-
-% Get amino acid volumes
-% p{6} = get_aa_volumes(cleaned);
-% pf{6} = 'Amino_acid_volume';
-
 % Extract features at positions    
 vect_pr = make_pr_feat_internal(cleaned, positions, p, Win_pr, pf);
 

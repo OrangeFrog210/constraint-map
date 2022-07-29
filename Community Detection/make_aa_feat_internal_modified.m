@@ -1,3 +1,8 @@
+% The original version of this file comes from https://github.com/vpejaver/mutpred2/blob/702782659c13ec2aa48bca5f2df8c8b493519e73/all_functions/make_aa_feat_internal.m
+% This is a modification of the script for the purpose of figuring out how to extract features my group wants.
+
+% -----------------------
+
 % Vikas Pejaver
 % November 2012
 
